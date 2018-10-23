@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script src="/static/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/add.css">
+        <link rel="stylesheet" href="/static/css/list.css">
+    <style>
+        body {
+            background-color: #eee;
+        }
+        .header {
+            width: 100%;
+            height: 60px;
+            background-color: #336699;
+        }
+
+        .menu {
+            background-color: beige;
+            position: fixed;
+            top: 60px;
+            bottom: 0px;
+            left: 0px;
+            width: 200px;
+        }
+
+        .content {
+            position: fixed;
+            top: 60px;
+            bottom: 0;
+            right: 0;
+            left: 200px;
+            overflow: auto;
+            padding: 10px;
+
+        }
+
+        .menu_btn {
+            font-size: 18px;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="header">
+    <span>用户名：{{ user }}</span>
+</div>
+<div class="contain">
+        {% load my_tags %}
+    <div class="menu">
+        {% get_menu request %}
+    </div>
+    <div class="content">
+        {% block con %}
+
+        {% endblock %}
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

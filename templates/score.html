@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <title>成绩录入</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+</head>
+<body>
+<h3 style="margin-left: 450px">录入成绩</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>学生姓名</th>
+                        <th>考勤</th>
+                        <th>成绩</th>
+                        <th>评语</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for study_record in study_record_list %}
+                        <tr>
+                            <td>{{ study_record.student }}</td>
+                            <td>{{ study_record.get_record_display }}</td>
+                            <td style="width: 150px;padding: 10px 20px">
+                                <select name="score_{{ study_record.pk }}" id="" class="form-control">
+                                    {% for item in record %}
+                                        {% if study_record.score == item.0 %}
+                                            <option selected value="{{ item.0 }}">{{ item.1 }}</option>
+                                        {% endif %}
+                                        <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </td>
+                            <td>
+                                <textarea name="homework_note_{{ study_record.pk }}" id="" cols="30" rows="3"
+                                          class="form-control">{{ study_record.homework_note }}</textarea>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-info pull-right">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block con %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3><p class="navbar-text navbar-right">添加数据</p></h3>
+            </div>
+            <div class="col-md-6 col-md-offset-3">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div style="position: relative">
+                            <label for="">{{ field.label }}</label>
+                            {{ field }} <span class="error">{{ field.errors.0 }}</span>
+
+                            {% if field.is_pop %}
+                                <a onclick="pop('{{ field.url }}')" href=""
+                                   style="position: absolute;right: -30px;top: 26px"><span
+                                        style="font-size: 26px">+</span></a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-warning pull-right">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function pop(url) {
+            window.open(url, "", "width=600,height=400,top=100,left=100")
+        }
+
+        function pop_response(pk, text, pop_res_id) {
+            var $option = $("<option>");   //创建一个标签
+            $option.html(text);           //将添加的数据的文本值给了这个标签内容
+            $option.val(pk);              //赋一个value值，值是这条记录的PK
+            $option.attr("selected", "selected");  //默认为选中
+            $("#" + pop_res_id).append($option)    //哪个标签后添加的，就把这个option放到哪个标签下。
+        }
+    </script>
+{% endblock %}

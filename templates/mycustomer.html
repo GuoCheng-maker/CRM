@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block con %}
+<h4>我的客户</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table-bordered table table-striped">
+                <thead>
+                <tr>
+                    <th>客户名字</th>
+                    <th>跟进人</th>
+                    <th>跟进状态</th>
+                    <th>日期</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer_distrbute in customer_distrbute_list %}
+                    <tr>
+                        <td>{{ customer_distrbute.customer }}</td>
+                        <td>{{ customer_distrbute.consultant }}</td>
+                        <td>{{ customer_distrbute.get_status_display }}</td>
+                    <td>{{ customer_distrbute.date }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

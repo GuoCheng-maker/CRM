@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <title>查看成绩</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script src="/static/jquery-3.3.1.js"></script>
+    <script src="/static/chart/highcharts.js"></script>
+</head>
+<body>
+<h3 style="margin-left: 450px">查看{{ student }}成绩</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>班级</th>
+                    <th>班主任</th>
+                    <th>任课老师</th>
+                    <th>成绩</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cls in class_list %}
+                    <tr>
+                        <td>{{ cls }}</td>
+                        <td>{{ cls.tutor }}</td>
+                        <td>
+                            {% for teacher in cls.teachers.all %}
+                                <span>{{ teacher }}</span>|
+                            {% endfor %}
+                        </td>
+                        <td><a class="check_chart" cid="{{ cls.pk }}" sid="{{ student.pk }}"><span>查看成绩</span></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div id="container" style="width:900px;height:400px"></div>
+<script>
+    $(".check_chart").click(function () {
+        $.ajax({
+            url: "",
+            type: "get",
+            data: {
+                sid: $(this).attr("sid"),
+                cid: $(this).attr("cid")
+            },
+            success: function (data) {
+                var chart = Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '课程成绩统计表'
+                    },
+                    subtitle: {
+                        text: '数据截止 2018-06，来源: <a href="https://www.cnblogs.com/geogre123/">Student成绩表</a>'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45  // 设置轴标签旋转角度
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: '分数 '
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: '分数: <b>{point.y:.1f}</b>'
+                    },
+                    series: [{
+                        name: '总人口',
+                        data: data,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            format: '{point.y:.1f}', // :.1f 为保留 1 位小数
+                            y: 10
+                        }
+                    }]
+                });
+            }
+        })
+    })
+</script>
+</body>
+</html>

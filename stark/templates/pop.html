@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <title>临时添加</title>
+</head>
+<body>
+<script>
+    window.opener.pop_response('{{ res.pk }}','{{ res.text }}','{{ res.pop_res_id }}');
+    window.close()
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <title>删除</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script src="/static/jquery-3.3.1.js"></script>
+</head>
+<body>
+
+
+
+<h3>请重复确认删除？</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger">确定删除</button>
+    <a href="{{ url }}" class="btn btn-info">取消</a>
+</form>
+
+</body>
+</html>

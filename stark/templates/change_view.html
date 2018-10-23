@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block con %}
+<div class="container">
+    <div class="row">
+                <div class="col-md-6">
+            <h3><p class="navbar-text navbar-right">编辑数据</p></h3>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        <label for="">{{ field.label }}</label>
+                        {{ field }} <span class="error">{{ field.errors.0 }}</span>
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-warning pull-right">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

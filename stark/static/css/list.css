@@ -1,0 +1,15 @@
+        body {
+            background-color: #eee;
+        }
+
+        .h2 {
+            margin-left: 400px;
+        }
+
+        .filter a {
+            text-decoration: none;
+        }
+
+        .active {
+            color: red !important;
+        }
